@@ -11,28 +11,19 @@ import {
 
 import { LoadingButton } from "@mui/lab";
 
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import agent from "../../app/api/agent";
 import { Product } from "../../app/models/product";
-import { useStoreContext } from "../../app/context/StoreContext";
 import { currencyFormat } from "../../app/util/util";
+import { useAppDispatch, UseAppSelector } from "../../app/store/configureStore";
+import { addBasketItemAsync } from "../basket/basketSlice";
 
 interface Props {
     product: Product;
 }
 
 function ProductCard({ product }: Props) {
-    const [loading, setLoading] = useState(false);
-    const { setBasket } = useStoreContext();
-
-    function handleAddItem(productId: number) {
-        setLoading(true);
-        agent.Basket.addItem(productId)
-            .then(basket => setBasket(basket))
-            .catch((error) => console.log(error))
-            .finally(() => setLoading(false));
-    }
+    const { status } = UseAppSelector(state => state.basket)
+    const dispatch = useAppDispatch();
 
     return (
         <Card>
@@ -62,8 +53,8 @@ function ProductCard({ product }: Props) {
             </CardContent>
             <CardActions>
                 <LoadingButton
-                    loading={loading}
-                    onClick={() => handleAddItem(product.id)}
+                    loading={status.includes('pendingAddItem' + product.id)}
+                    onClick={() => dispatch(addBasketItemAsync({ productId: product.id }))}
                     size="small"
                 >
                     ADD TO CART
