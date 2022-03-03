@@ -1,4 +1,4 @@
-import { FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { FormControl, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 
 interface Props {
     options: any[];
@@ -6,21 +6,14 @@ interface Props {
     selectedValue: string;
 }
 
-function RadioButtonGroup({ options, onChange, selectedValue }: Props) {
+export default function RadioButtonGroup({options, onChange, selectedValue}: Props) {
     return (
-        <FormControl component='fieldset'>
+        <FormControl component="fieldset">
             <RadioGroup onChange={onChange} value={selectedValue}>
                 {options.map(({ value, label }) => (
-                    <FormControlLabel
-                        value={value}
-                        control={<Radio />}
-                        label={label}
-                        key={value}
-                    />
+                    <FormControlLabel value={value} control={<Radio />} label={label} key={value} />
                 ))}
             </RadioGroup>
         </FormControl>
-    );
+    )
 }
-
-export default RadioButtonGroup;

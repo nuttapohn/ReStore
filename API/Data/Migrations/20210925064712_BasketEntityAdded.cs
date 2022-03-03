@@ -7,7 +7,7 @@ namespace API.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Baaskets",
+                name: "Baskets",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -16,7 +16,7 @@ namespace API.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Baaskets", x => x.Id);
+                    table.PrimaryKey("PK_Baskets", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,9 +33,9 @@ namespace API.Data.Migrations
                 {
                     table.PrimaryKey("PK_BasketItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BasketItems_Baaskets_BasketId",
+                        name: "FK_BasketItems_Baskets_BasketId",
                         column: x => x.BasketId,
-                        principalTable: "Baaskets",
+                        principalTable: "Baskets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -63,7 +63,7 @@ namespace API.Data.Migrations
                 name: "BasketItems");
 
             migrationBuilder.DropTable(
-                name: "Baaskets");
+                name: "Baskets");
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220214134726_BasketEntityAdded")]
+    [Migration("20210925064712_BasketEntityAdded")]
     partial class BasketEntityAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Baaskets");
+                    b.ToTable("Baskets");
                 });
 
             modelBuilder.Entity("API.Entities.BasketItem", b =>
